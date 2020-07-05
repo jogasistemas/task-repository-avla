@@ -57,17 +57,20 @@ public class TaskController {
             task.setId(request.getId());
             task.setTitle(request.getTitle());
             task.setDescription(request.getDescription());
-            if (request.getUserId() != 0) {
-                int userId = request.getUserId();
-                Optional<User> userOptional = this.userService.getById(userId);
-                if (userOptional.isPresent()) {
-                    task.setUser(userOptional.get());
-                    task.setStatus(Task.TaskStatus.INPROGRESS.ordinal());
-                }  else {
-                    task.setStatus(Task.TaskStatus.TODO.ordinal());
-                }
-            }
+            System.out.println("estatus : "+request.getStatus());
+            task.setStatus(request.getStatus());
+//            if (request.getUserId() != 0) {
+//                int userId = request.getUserId();
+//                Optional<User> userOptional = this.userService.getById(userId);
+//                if (userOptional.isPresent()) {
+//                    task.setUser(userOptional.get());
+//                    task.setStatus(Task.TaskStatus.INPROGRESS.ordinal());
+//                }  else {
+//                    task.setStatus(Task.TaskStatus.TODO.ordinal());
+//                }
+//            }
 
+            
             taskService.save(task);
         }
 
