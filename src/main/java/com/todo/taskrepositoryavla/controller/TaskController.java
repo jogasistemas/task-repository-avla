@@ -59,16 +59,13 @@ public class TaskController {
             task.setDescription(request.getDescription());
             System.out.println("estatus : "+request.getStatus());
             task.setStatus(request.getStatus());
-//            if (request.getUserId() != 0) {
-//                int userId = request.getUserId();
-//                Optional<User> userOptional = this.userService.getById(userId);
-//                if (userOptional.isPresent()) {
-//                    task.setUser(userOptional.get());
-//                    task.setStatus(Task.TaskStatus.INPROGRESS.ordinal());
-//                }  else {
-//                    task.setStatus(Task.TaskStatus.TODO.ordinal());
-//                }
-//            }
+            if (request.getUserId() != 0) {
+                int userId = request.getUserId();
+                Optional<User> userOptional = this.userService.getById(userId);
+                if (userOptional.isPresent()) {
+                    task.setUser(userOptional.get());
+                }
+            }
 
             
             taskService.save(task);
@@ -88,15 +85,12 @@ public class TaskController {
         task.setStatus(Task.TaskStatus.TODO.ordinal());
         task.setCreateDate(new Date());
         System.out.println("idUser : "+request.getUserId());
-        task.setStatus(request.getId());
+        task.setStatus(request.getStatus());
         if (request.getUserId() != 0) {
             int userId = request.getUserId();
             Optional<User> userOptional = this.userService.getById(userId);
             if (userOptional.isPresent()) {
                 task.setUser(userOptional.get());
-                task.setStatus(Task.TaskStatus.INPROGRESS.ordinal());
-            }  else {
-                task.setStatus(Task.TaskStatus.TODO.ordinal());
             }
         }
         taskService.save(task);

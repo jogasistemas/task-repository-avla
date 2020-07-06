@@ -11,7 +11,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq_id")
     @SequenceGenerator(name="user_seq_id", sequenceName="user_seq_id",allocationSize=50)
-    private int id;
+    private int userId;
 
     private String names;
 
@@ -21,14 +21,6 @@ public class User {
     @JsonBackReference("user")
     private List<Task> tasks;
     
-    public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public String getNames() {
 		return names;
 	}
@@ -52,4 +44,13 @@ public class User {
 	public void setTasks(List<Task> tasks) {
 		this.tasks = tasks;
 	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+	
 }
