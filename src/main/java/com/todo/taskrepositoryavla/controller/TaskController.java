@@ -98,20 +98,4 @@ public class TaskController {
         return new ResponseEntity<>(status, HttpStatus.ACCEPTED);
     }
 
-    @RequestMapping(value = "/finish/{id}", method = RequestMethod.GET)
-    @CrossOrigin(origins = "*", methods= {RequestMethod.GET})
-    public ResponseEntity<Boolean> finish(@PathVariable int id) {
-        boolean status = false;
-        Optional<Task> taskOptional = this.taskService.getById(id);
-        if (taskOptional.isPresent()) {
-            if (taskOptional.get().getStatus() == Task.TaskStatus.INPROGRESS.ordinal() && !taskOptional.get().getUser().equals(null)) {
-                Task task = taskOptional.get();
-                task.setStatus(Task.TaskStatus.COMPLETED.ordinal());
-                status = true;
-                taskService.save(task);
-            }
-        }
-
-        return new ResponseEntity<>(status, HttpStatus.ACCEPTED);
-    }
-}
+ }

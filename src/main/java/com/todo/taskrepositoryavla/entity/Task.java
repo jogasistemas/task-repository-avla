@@ -30,9 +30,6 @@ public class Task {
 	@Column(name = "status")
     private int status;
 
-	@Column(name = "finished")
-    private boolean finished;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name="fK_task_user_id"))
     private User user;
@@ -69,14 +66,6 @@ public class Task {
 
 	public void setStatus(int status) {
 		this.status = status;
-	}
-
-	public boolean isFinished() {
-		return finished;
-	}
-
-	public void setFinished(boolean finished) {
-		this.finished = finished;
 	}
 
 	public User getUser() {
