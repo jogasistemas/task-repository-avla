@@ -11,13 +11,16 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq_id")
     @SequenceGenerator(name="user_seq_id", sequenceName="user_seq_id",allocationSize=50)
+	@Column(name = "id")
     private int userId;
 
+    @Column(name = "names")
     private String names;
 
+	@Column(name = "last_names")
     private String lastNames;
 
-    @OneToMany(fetch = FetchType.EAGER,mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonBackReference("user")
     private List<Task> tasks;
     
@@ -52,5 +55,6 @@ public class User {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+
 	
 }

@@ -9,7 +9,7 @@ import java.util.Date;
 @Table(name="tasks")
 public class Task {
 
-    public enum TaskStatus {
+	public enum TaskStatus {
         TODO,
         INPROGRESS,
         COMPLETED
@@ -18,19 +18,23 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "task_seq_id")
     @SequenceGenerator(name="task_seq_id", sequenceName="task_seq_id",allocationSize=1)
+	@Column(name = "id")
     private int id;
 
+	@Column(name = "title")
     private String title;
 
+	@Column(name = "description")
     private String description;
 
+	@Column(name = "status")
     private int status;
 
+	@Column(name = "finished")
     private boolean finished;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name="fK_task_user_id"))
-    @JsonBackReference("user")
     private User user;
 
     private Date createDate;
@@ -90,4 +94,5 @@ public class Task {
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
+
 }
